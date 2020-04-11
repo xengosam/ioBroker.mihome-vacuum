@@ -529,7 +529,7 @@ adapter.on('stateChange', function (id, state) {
 
         } else if (command === 'set_mop') {
             if (!state.val) return;
-            sendCommand(com.set_mop, state.val {
+            sendCommand(com.set_mop, state.val) {
                 adapter.setForeignState(id, state.val, true);
             });
 /*
