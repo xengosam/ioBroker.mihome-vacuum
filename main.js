@@ -531,7 +531,7 @@ adapter.on('stateChange', function (id, state) {
             if (!state.val) return;
 			
             callRobot('set_mop', '['+state.val+']').then(answer => {
-                adapter.setState(id, state.val, true);
+                adapter.setForeignState(id, state.val, true);
             });
 /*
         } else if (command === 'resumeRoomClean') {
