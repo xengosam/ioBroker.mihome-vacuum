@@ -185,7 +185,7 @@ class Cleaning {
     }
 
     stopCleaning(){
-        sendCommand(com.pause).then(()=>{
+        sendCommand(com.pause, [0,2,0]).then(()=>{
             sendCommand(com.home).then(sendPing)
         });
         this.clearQueue();
@@ -666,6 +666,10 @@ const com = {
     },
     "sound_volume_test": {
         "method": "test_sound_volume"
+    },
+    "set_language": {
+        "method": "set_language",
+		"params": [2]
     },
     "fan_power": {
         "method": "set_custom_mode"
@@ -1296,6 +1300,7 @@ function serverConnected(){
             setTimeout(checkWiFi, 200)
             //setTimeout(sendCommand, 400, com.get_sound_volume)
             setTimeout(sendCommand, 600, com.get_consumable)
+			setTimeout(sendCommand, 600, com.set_language)
            // setTimeout(sendCommand, 800, com.clean_summary)
             setTimeout(features.detect, 1000)
             if (MAP.ENABLED)
