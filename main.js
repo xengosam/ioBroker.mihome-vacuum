@@ -607,14 +607,17 @@ const com = {
     "find": {
         "method": "find_me"
     },
-    "start": {
-        "method": "app_start"
+     "start": {
+		"method": "set_mode_withroom",
+		"params": [0,1,0]
     },
     "pause": {
-        "method": "app_pause"
+        "method": "set_mode_withroom",
+		"params": [0,2,0]
     },
     "home": {
-        "method": "app_charge"
+        "method": "set_charge",
+		"params": [1]
     },
     "get_status": {
         "method": "get_status",
