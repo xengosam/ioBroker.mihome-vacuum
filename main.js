@@ -900,6 +900,7 @@ function receiveMsgFromRobot(message) {
         const answer = JSON.parse(message);
         answer.id = parseInt(answer.id, 10);
         lastResponse= new Date();
+		 adapter.log.debug(message);
         requestMessage = messages[answer.id] 
         requestMessage && delete messages[answer.id];
         if (answer.error) {
@@ -1289,7 +1290,7 @@ function serverConnected(){
         adapter.log.warn('Time difference between Mihome Vacuum and ioBroker: ' + packet.timediff + ' sec');
 
     adapter.log.info('connecting, this can take up to 10 minutes ...')
-sendCommand(com.get_status,["battary_life"]).then(() =>{
+//sendCommand(com.get_status,["battary_life"]).then(() =>{
         lastResponse= new Date();
         if (!connected){ // it is the first successed call 
             connected = true;
@@ -1633,7 +1634,7 @@ adapter.on('message',function(obj) {
 
                 // Basic information
             case 'getStatus':
-                sendCustomCommand('get_status', parseStatus);
+                sendCustomCommand('get_prop', parseStatus);
                 return;
             case 'getSerialNumber':
                 sendCustomCommand('get_serial_number', function (resp) {
