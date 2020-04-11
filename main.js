@@ -55,7 +55,7 @@ const cleanStates = {
 	Initiating : 1,
 //??? : 4,
 	Cleaning : 3,
-	Back_toHome : 6,
+	Back_toHome : 4,
 	ManuellMode : 7,
 	Charging : 5,
 	Charging_Error : 9,
@@ -787,7 +787,7 @@ const com = {
         }
     },
     "loadMap": { // todo: when is trigered get_fresh_map_v1??
-        "method": "get_map_v1",
+        "method": "get_map",
         "action": function (answer) {
             MAP.updateMapPointer(answer.result[0]);
         }
@@ -1630,7 +1630,7 @@ adapter.on('message',function(obj) {
                 // case 'getCleaningRecordMap':
                 //     sendCustomCommand('get_clean_record_map');
             case 'getMap':
-                sendCustomCommand('get_map_v1');
+                sendCustomCommand('get_map');
                 return;
 
                 // Basic information
@@ -1760,7 +1760,7 @@ MAP.Init = function () {
 
         if (adapter.config.enableMiMap) {
             Map.login().then(function (anser) {
-                //reqParams.push('get_map_v1'); todo: is this nessessary, or it is enough with mapPoll? 
+                //reqParams.push('get_map'); todo: is this nessessary, or it is enough with mapPoll? 
                 MAP.ready.login = true;
             }).catch(error => {
                 adapter.log.warn(error);
