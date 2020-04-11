@@ -846,7 +846,6 @@ function callRobot(method, params){
             const message = {};
             message.id = packet.msgCounter++;
             message.method = method;
-			adapter.log.warn("params" + params + "method" + method);
 			
             if (!(params === '' || params === undefined || params === null || (params instanceof Array && params.length === 1 && params[0] === ''))) {
                 message.params = params;
@@ -1287,7 +1286,7 @@ function serverConnected(){
         adapter.log.warn('Time difference between Mihome Vacuum and ioBroker: ' + packet.timediff + ' sec');
 
     adapter.log.info('connecting, this can take up to 10 minutes ...')
-    sendCommand(com.get_status).then(() =>{
+    sendCommand(com.get_status,"battary_life").then(() =>{
         lastResponse= new Date();
         if (!connected){ // it is the first successed call 
             connected = true;
