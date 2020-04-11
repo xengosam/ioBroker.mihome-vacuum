@@ -263,8 +263,8 @@ class FeatureManager {
     }
 
     detect() {
-        //sendCommand(com.get_carpet_mode) // test, if supported
-        //sendCommand(com.loadRooms); // test, if supported
+        sendCommand(com.get_carpet_mode) // test, if supported
+        sendCommand(com.loadRooms); // test, if supported
     }
 
     setModel(model) {
@@ -1299,10 +1299,10 @@ function serverConnected(){
             adapter.setState('info.connection', true, true);
             setTimeout(checkWiFi, 200)
             //setTimeout(sendCommand, 400, com.get_sound_volume)
-           // setTimeout(sendCommand, 600, com.get_consumable)
-			//setTimeout(sendCommand, 600, com.set_language, [2])
+            setTimeout(sendCommand, 600, com.get_consumable)
+			setTimeout(sendCommand, 600, com.set_language, [2])
            // setTimeout(sendCommand, 800, com.clean_summary)
-           // setTimeout(features.detect, 1000)
+            setTimeout(features.detect, 1000)
             if (MAP.ENABLED)
                 setTimeout(sendCommand, 1200, com.loadMap)
         }
