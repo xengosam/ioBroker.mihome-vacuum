@@ -621,12 +621,12 @@ const com = {
         "method": "get_prop",
 		"params": ['run_state','mode','err_state','battary_life','box_type','mop_type','s_time','s_area','suction_grade','water_grade','remember_map','has_map','is_mop','has_newmap'],
         "action": function (answer) {
-			 adapter.log.debug('PROP_LOGGING' + answer.result[0]);
             adapter.setStateChanged('info.battery', answer.result[3], true);
             adapter.setStateChanged('info.cleanedtime', Math.round(answer.result[6] / 60), true);
             adapter.setStateChanged('info.cleanedarea', Math.round(answer.result[7] / 10000) / 100, true);
             adapter.setStateChanged('control.fan_power', Math.round(answer.result[8]), true);
-          //  adapter.setStateChanged('info.error', status.error_code, true);
+            adapter.setStateChanged('info.error', answer.result[2], true);
+			adapter.setStateChanged('control.set_mop', answer.result[12], true);
             //adapter.setStateChanged('info.dnd', status.dnd_enabled, true);
             features.setWaterBox(answer.result[9]);
             if (cleaning.state != answer.result[0]) {
@@ -671,6 +671,9 @@ const com = {
     },
     "fan_power": {
         "method": "set_custom_mode"
+    },
+	 "set_mop": {
+        "method": "set_mop"
     },
     "clean_summary": {
         "method": "get_clean_summary",
@@ -1079,6 +1082,16 @@ function enabledExpert() {
             type: 'state',
             common: {
                 name: 'get response',
+                type: 'string',
+                read: true,
+                write: false,
+            },
+            native: {}
+        });
+		 adapter.setObjectNotExists('control.set_mop', {
+            type: 'state',
+            common: {
+                name: 'set_mop',
                 type: 'string',
                 read: true,
                 write: false,
