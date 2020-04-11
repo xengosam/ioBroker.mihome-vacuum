@@ -186,7 +186,7 @@ class Cleaning {
 
     stopCleaning(){
         sendCommand(com.pause, [0,2,0]).then(()=>{
-            sendCommand(com.home).then(sendPing)
+            sendCommand(com.home,[1]).then(sendPing)
         });
         this.clearQueue();
     }
@@ -1300,7 +1300,7 @@ function serverConnected(){
             setTimeout(checkWiFi, 200)
             //setTimeout(sendCommand, 400, com.get_sound_volume)
             setTimeout(sendCommand, 600, com.get_consumable)
-			setTimeout(sendCommand, 600, com.set_language)
+			setTimeout(sendCommand, 600, com.set_language, [2])
            // setTimeout(sendCommand, 800, com.clean_summary)
             setTimeout(features.detect, 1000)
             if (MAP.ENABLED)
