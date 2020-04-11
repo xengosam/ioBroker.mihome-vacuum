@@ -846,11 +846,13 @@ function callRobot(method, params){
             const message = {};
             message.id = packet.msgCounter++;
             message.method = method;
+			adapter.log.warn.("params" + params "method" + method);
+			
             if (!(params === '' || params === undefined || params === null || (params instanceof Array && params.length === 1 && params[0] === ''))) {
                 message.params = params;
             }
             messages[message.id] = {
-                str: JSON.stringify(message).replace('["[', '[[').replace(']"]', ']]'),
+              str: JSON.stringify(message).replace('["[', '[[').replace(']"]', ']]').replace('[[','[').replace(']]',']'),
                 reject: reject,
                 resolve: resolve,
                 tryCount: 0
