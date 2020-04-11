@@ -526,13 +526,13 @@ adapter.on('stateChange', function (id, state) {
         } else if (command === 'zoneClean') {
             adapter.sendTo(adapter.namespace, "cleanZone", state.val)
             adapter.setForeignState(id, '', true);
-/* removed to commands.js
-        } else if (command === 'resumeZoneClean') {
+
+        } else if (command === 'set_mop') {
             if (!state.val) return;
-            sendMsg('resume_zoned_clean', null, function () {
+            sendMsg('set_mop', [state.val], function () {
                 adapter.setForeignState(id, state.val, true);
             });
-
+/*
         } else if (command === 'resumeRoomClean') {
             if (!state.val) return;
             sendMsg('resume_segment_clean', null, function () {
