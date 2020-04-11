@@ -1093,7 +1093,7 @@ function enabledExpert() {
             type: 'state',
             common: {
                 name: 'set_mop',
-                type: 'string',
+                type: 'int',
                 read: true,
                 write: true,
             },
