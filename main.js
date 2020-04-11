@@ -622,7 +622,7 @@ const com = {
 		"params": ['run_state','mode','err_state','battary_life','box_type','mop_type','s_time','s_area','suction_grade','water_grade','remember_map','has_map','is_mop','has_newmap'],
         "action": function (answer) {
             const status = parseStatus(answer);
-			 adapter.log.debug('PROP_LOGGING' + status.battary_life);
+			 adapter.log.debug('PROP_LOGGING' + answer.result[0]);
             adapter.setStateChanged('info.battery', status.battery, true);
             adapter.setStateChanged('info.cleanedtime', Math.round(status.clean_time / 60), true);
             adapter.setStateChanged('info.cleanedarea', Math.round(status.clean_area / 10000) / 100, true);
