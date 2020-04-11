@@ -1506,12 +1506,12 @@ adapter.on('message',function(obj) {
                 // https://github.com/MeisterTR/XiaomiRobotVacuumProtocol#vaccum-commands
 
                 // cleaning commands
-            case 'startVacuuming':
+              case 'startVacuuming':
                 if (cleaning.startCleaning(cleanStates.Cleaning, obj))
-                    sendCustomCommand('app_start');
+                    sendCustomCommand('set_mode_withroom',[0, 1, 0]);
                 return;
             case 'stopVacuuming':
-                sendCustomCommand('app_stop');
+                sendCustomCommand('set_mode_withroom',[0, 2, 0]);
                 return;
             case 'clearQueue':
                 return cleaning.clearQueue();
