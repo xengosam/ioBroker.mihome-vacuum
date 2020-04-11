@@ -1307,7 +1307,7 @@ function serverConnected(){
             if (MAP.ENABLED)
                 setTimeout(sendCommand, 1200, com.loadMap)
         }
-    })
+   // })
 }
 
 function main() {
