@@ -526,14 +526,13 @@ adapter.on('stateChange', function (id, state) {
         } else if (command === 'zoneClean') {
             adapter.sendTo(adapter.namespace, "cleanZone", state.val)
             adapter.setForeignState(id, '', true);
-
-        } else if (command === 'set_mop') {
+/* removed to commands.js
+        } else if (command === 'resumeZoneClean') {
             if (!state.val) return;
-			
-		callRobot('set_mop','['+state.val+ ']' ).then(answer => {
+            sendMsg('resume_zoned_clean', null, function () {
                 adapter.setForeignState(id, state.val, true);
             });
-/*
+
         } else if (command === 'resumeRoomClean') {
             if (!state.val) return;
             sendMsg('resume_segment_clean', null, function () {
@@ -627,7 +626,7 @@ const com = {
             adapter.setStateChanged('info.cleanedarea', Math.round(answer.result[7] / 10000) / 100, true);
             adapter.setStateChanged('control.fan_power', Math.round(answer.result[8]), true);
             adapter.setStateChanged('info.error', answer.result[2], true);
-			adapter.setStateChanged('control.set_mop', answer.result[12], true);
+			adapter.setStateChanged('info.set_mop', answer.result[12], true);
             //adapter.setStateChanged('info.dnd', status.dnd_enabled, true);
             features.setWaterBox(answer.result[9]);
             if (cleaning.state != answer.result[0]) {
@@ -1089,13 +1088,13 @@ function enabledExpert() {
             },
             native: {}
         });
-		 adapter.setObjectNotExists('control.set_mop', {
+		 adapter.setObjectNotExists('info.set_mop', {
             type: 'state',
             common: {
                 name: 'set_mop',
-                type: 'int',
+                type: 'string',
                 read: true,
-                write: true,
+                write: false,
             },
             native: {}
         });
