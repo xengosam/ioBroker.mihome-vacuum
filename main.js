@@ -1289,7 +1289,7 @@ function serverConnected(){
         adapter.log.warn('Time difference between Mihome Vacuum and ioBroker: ' + packet.timediff + ' sec');
 
     adapter.log.info('connecting, this can take up to 10 minutes ...')
-    sendCommand(com.get_status,["battary_life").then(() =>{
+sendCommand(com.get_status,["battary_life"]).then(() =>{
         lastResponse= new Date();
         if (!connected){ // it is the first successed call 
             connected = true;
