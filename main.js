@@ -1269,7 +1269,7 @@ function sendPing() {
             adapter.log.warn('Cannot send ping: ' + e);
         }
     } else {
-        sendCommand(com.get_status, ['run_state','mode','err_state','battary_life','box_type','mop_type','s_time','s_area','suction_grade','water_grade','remember_map','has_map','is_mop','has_newmap'])
+       // sendCommand(com.get_status, ['run_state','mode','err_state','battary_life','box_type','mop_type','s_time','s_area','suction_grade','water_grade','remember_map','has_map','is_mop','has_newmap'])
         if (now > nextWiFiCheck)
             checkWiFi()
         timerManager && timerManager.check()
@@ -1285,7 +1285,7 @@ function serverConnected(){
         adapter.log.warn('Time difference between Mihome Vacuum and ioBroker: ' + packet.timediff + ' sec');
 
     adapter.log.info('connecting, this can take up to 10 minutes ...')
-    sendCommand(com.get_status, ['run_state','mode','err_state','battary_life','box_type','mop_type','s_time','s_area','suction_grade','water_grade','remember_map','has_map','is_mop','has_newmap']).then(() =>{
+    sendCommand(com.get_status).then(() =>{
         lastResponse= new Date();
         if (!connected){ // it is the first successed call 
             connected = true;
