@@ -70,7 +70,7 @@ const cleanStates = {
 	RoomCleaning : 18
 }
 const activeCleanStates = {
-    5: { 
+    3: { 
         name: 'all ',
         resume: 'app_start'
     },
