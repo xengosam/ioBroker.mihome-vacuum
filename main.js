@@ -530,7 +530,7 @@ adapter.on('stateChange', function (id, state) {
         } else if (command === 'set_mop') {
             if (!state.val) return;
 			
-            callRobot('set_mop', state.val).then(answer => {
+            callRobot('set_mop', '['+state.val+']').then(answer => {
                 adapter.setState(id, state.val, true);
             });
 /*
