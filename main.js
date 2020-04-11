@@ -637,7 +637,7 @@ const com = {
         }
     },
     "get_consumable": {
-        "method": "get_consumable",
+        "method": "get_consumables",
         "action": function (answer) {
             // response= {"result":[{"main_brush_work_time":11472,"side_brush_work_time":11472,"filter_work_time":11472,"filter_element_work_time":3223,"sensor_dirty_time":11253}]}
             const consumable = answer.result[0] //parseConsumable(answer)
@@ -1294,9 +1294,9 @@ function serverConnected(){
             adapter.log.info('Connected');
             adapter.setState('info.connection', true, true);
             setTimeout(checkWiFi, 200)
-            setTimeout(sendCommand, 400, com.get_sound_volume)
+            //setTimeout(sendCommand, 400, com.get_sound_volume)
             setTimeout(sendCommand, 600, com.get_consumable)
-            setTimeout(sendCommand, 800, com.clean_summary)
+           // setTimeout(sendCommand, 800, com.clean_summary)
             setTimeout(features.detect, 1000)
             if (MAP.ENABLED)
                 setTimeout(sendCommand, 1200, com.loadMap)
@@ -1599,7 +1599,7 @@ adapter.on('message',function(obj) {
                 // get info about the consumables
                 // TODO: parse the results
             case 'getConsumableStatus':
-                sendCustomCommand('get_consumable', returnSingleResult);
+                sendCustomCommand('get_consumables', returnSingleResult);
                 return;
             case 'resetConsumables':
                 if (!requireParams(['consumable'])) return;
