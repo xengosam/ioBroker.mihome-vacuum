@@ -626,9 +626,9 @@ const com = {
             adapter.setStateChanged('info.cleanedtime', Math.round(answer.result[6] / 60), true);
             adapter.setStateChanged('info.cleanedarea', Math.round(answer.result[7] / 10000) / 100, true);
             adapter.setStateChanged('control.fan_power', Math.round(answer.result[8]), true);
-            adapter.setStateChanged('info.error', status.error_code, true);
+          //  adapter.setStateChanged('info.error', status.error_code, true);
             //adapter.setStateChanged('info.dnd', status.dnd_enabled, true);
-            features.setWaterBox(status.water_box_status);
+            features.setWaterBox(answer.result[9]);
             if (cleaning.state != answer.result[0]) {
                 cleaning.setRemoteState(answer.result[0])
             }
