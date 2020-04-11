@@ -530,7 +530,7 @@ adapter.on('stateChange', function (id, state) {
         } else if (command === 'set_mop') {
             if (!state.val) return;
 			
-            callRobot('set_mop', '['+state.val+']').then(answer => {
+		callRobot('set_mop','['+state.val+ ']' ).then(answer => {
                 adapter.setForeignState(id, state.val, true);
             });
 /*
@@ -1095,7 +1095,7 @@ function enabledExpert() {
                 name: 'set_mop',
                 type: 'string',
                 read: true,
-                write: false,
+                write: true,
             },
             native: {}
         });
