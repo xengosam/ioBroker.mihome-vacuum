@@ -988,6 +988,7 @@ const errorTexts = {
  */
 function parseStatus(response) {
     response = response.result[0];
+	 adapter.log.debug("RESPONSE:" + response);
     response.dnd_enabled = response.dnd_enabled === 1;
     response.error_text = errorTexts[response.error_code];
     response.in_cleaning = response.in_cleaning === 1;
