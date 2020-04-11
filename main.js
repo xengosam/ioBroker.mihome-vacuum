@@ -621,17 +621,16 @@ const com = {
         "method": "get_prop",
 		"params": ['run_state','mode','err_state','battary_life','box_type','mop_type','s_time','s_area','suction_grade','water_grade','remember_map','has_map','is_mop','has_newmap'],
         "action": function (answer) {
-            const status = parseStatus(answer);
 			 adapter.log.debug('PROP_LOGGING' + answer.result[0]);
-            adapter.setStateChanged('info.battery', status.battery, true);
-            adapter.setStateChanged('info.cleanedtime', Math.round(status.clean_time / 60), true);
-            adapter.setStateChanged('info.cleanedarea', Math.round(status.clean_area / 10000) / 100, true);
-            adapter.setStateChanged('control.fan_power', Math.round(status.fan_power), true);
+            adapter.setStateChanged('info.battery', answer.result[3], true);
+            adapter.setStateChanged('info.cleanedtime', Math.round(answer.result[6] / 60), true);
+            adapter.setStateChanged('info.cleanedarea', Math.round(answer.result[7] / 10000) / 100, true);
+            adapter.setStateChanged('control.fan_power', Math.round(answer.result[8]), true);
             adapter.setStateChanged('info.error', status.error_code, true);
-            adapter.setStateChanged('info.dnd', status.dnd_enabled, true);
+            //adapter.setStateChanged('info.dnd', status.dnd_enabled, true);
             features.setWaterBox(status.water_box_status);
-            if (cleaning.state != status.state) {
-                cleaning.setRemoteState(status.state)
+            if (cleaning.state != answer.result[0]) {
+                cleaning.setRemoteState(answer.result[0])
             }
         }
     },
