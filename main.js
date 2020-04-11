@@ -163,7 +163,7 @@ class Cleaning {
             if (cleanStatus === cleanStates.Cleaning && adapter.config.enableResumeZone) {
                 adapter.log.debug('Resuming paused ' + activeCleanStates[this.activeState].name);
                 sendCommand({method:activeCleanStates[this.activeState].resume}).then(function(){
-                    sendCommand(com.get_status)
+                    sendCommand(com.get_status, ['run_state','mode','err_state','battary_life','box_type','mop_type','s_time','s_area','suction_grade','water_grade','remember_map','has_map','is_mop','has_newmap'])
                 })
             } else {
                 adapter.log.info("should trigger cleaning " + activeCleanState.name + (messageObj.message || '') + ", but is currently active. Add to queue")
@@ -620,7 +620,8 @@ const com = {
 		"params": [1]
     },
     "get_status": {
-        "method": "get_status",
+        "method": "get_prop",
+		"params": ['run_state','mode','err_state','battary_life','box_type','mop_type','s_time','s_area','suction_grade','water_grade','remember_map','has_map','is_mop','has_newmap'],
         "action": function (answer) {
             const status = parseStatus(answer);
             adapter.setStateChanged('info.battery', status.battery, true);
@@ -1268,7 +1269,7 @@ function sendPing() {
             adapter.log.warn('Cannot send ping: ' + e);
         }
     } else {
-        sendCommand(com.get_status)
+        sendCommand(com.get_status, ['run_state','mode','err_state','battary_life','box_type','mop_type','s_time','s_area','suction_grade','water_grade','remember_map','has_map','is_mop','has_newmap'])
         if (now > nextWiFiCheck)
             checkWiFi()
         timerManager && timerManager.check()
@@ -1284,7 +1285,7 @@ function serverConnected(){
         adapter.log.warn('Time difference between Mihome Vacuum and ioBroker: ' + packet.timediff + ' sec');
 
     adapter.log.info('connecting, this can take up to 10 minutes ...')
-    sendCommand(com.get_status).then(() =>{
+    sendCommand(com.get_status, ['run_state','mode','err_state','battary_life','box_type','mop_type','s_time','s_area','suction_grade','water_grade','remember_map','has_map','is_mop','has_newmap']).then(() =>{
         lastResponse= new Date();
         if (!connected){ // it is the first successed call 
             connected = true;
