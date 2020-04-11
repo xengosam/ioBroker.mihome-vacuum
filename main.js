@@ -987,12 +987,13 @@ const errorTexts = {
  *                          "lab_status":1,"water_box_status":0,"fan_power":103,"dnd_enabled":0,"map_status":3,"lock_status":0}]
  */
 function parseStatus(response) {
-    response = response.result[0];
+    response.in_cleaning = response.result[0] === 3;
+	response.map_present = response.result[11];
 	 adapter.log.debug("RESPONSE:" + response);
-    response.dnd_enabled = response.dnd_enabled === 1;
-    response.error_text = errorTexts[response.error_code];
-    response.in_cleaning = response.in_cleaning === 1;
-    response.map_present = response.map_present === 1;
+    //response.dnd_enabled = response.dnd_enabled === 1;
+   // response.error_text = errorTexts[response.error_code];
+
+
     //response.state_text= statusTexts[response.state];
     return response;
 }
