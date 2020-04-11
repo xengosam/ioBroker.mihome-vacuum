@@ -1306,7 +1306,7 @@ sendCommand(com.get_status,["battary_life"]).then(() =>{
             if (MAP.ENABLED)
                 setTimeout(sendCommand, 1200, com.loadMap)
         }
-   // })
+    })
 }
 
 function main() {
