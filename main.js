@@ -523,7 +523,7 @@ adapter.on('stateChange', function (id, state) {
 
         } else if (command === 'set_mop') {
             if (!state.val) return;
-            adapter.sendTo(adapter.namespace, "set_mop",state.val)
+           sendCommand('set_mop',state.val)
             adapter.setForeignState(id, state.val, true);
 
         } else if (command === 'carpet_mode') {
@@ -645,7 +645,7 @@ const com = {
             adapter.setStateChanged('info.cleanedarea', Math.round(answer.result[7] / 10000) / 100, true);
             adapter.setStateChanged('control.fan_power', Math.round(answer.result[8]), true);
             adapter.setStateChanged('info.error', answer.result[2], true);
-			adapter.setStateChanged('info.set_mop', answer.result[12], true);
+			adapter.setStateChanged('control.set_mop', answer.result[12], true);
 			adapter.setStateChanged('consumable.main_brush', answer.result[20], true);    // 300h
             adapter.setStateChanged('consumable.side_brush',  answer.result[18], true);
 			adapter.setStateChanged('consumable.waterBox_filter', answer.result[16], true);
