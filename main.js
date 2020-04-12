@@ -523,7 +523,7 @@ adapter.on('stateChange', function (id, state) {
 
         } else if (command === 'set_mop') {
             if (!state.val) return;
-           sendCommand('set_mop',state.val)
+           sendCommand({method:'set_mop'},{params:'['+state.val+ ']'})
             adapter.setForeignState(id, state.val, true);
 
         } else if (command === 'carpet_mode') {
