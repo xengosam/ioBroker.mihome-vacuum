@@ -521,6 +521,11 @@ adapter.on('stateChange', function (id, state) {
             adapter.sendTo(adapter.namespace, "cleanSpot",null)
             adapter.setForeignState(id, state.val, true);
 
+        } else if (command === 'set_mop') {
+            if (!state.val) return;
+            adapter.sendTo(adapter.namespace, "set_mop",state.val)
+            adapter.setForeignState(id, state.val, true);
+
         } else if (command === 'carpet_mode') {
             //when carpetmode change
             sendCommand({method:'set_carpet_mode'}, [{
@@ -641,10 +646,11 @@ const com = {
             adapter.setStateChanged('control.fan_power', Math.round(answer.result[8]), true);
             adapter.setStateChanged('info.error', answer.result[2], true);
 			adapter.setStateChanged('info.set_mop', answer.result[12], true);
-			 adapter.setStateChanged('consumable.main_brush', answer.result[20], true);    // 300h
-            adapter.setStateChanged('consumable.side_brush',  answer.result[18], true);    // 200h
+			adapter.setStateChanged('consumable.main_brush', answer.result[20], true);    // 300h
+            adapter.setStateChanged('consumable.side_brush',  answer.result[18], true);
+			adapter.setStateChanged('consumable.waterBox_filter', answer.result[16], true);
             adapter.setStateChanged('consumable.filter', answer.result[22], true);          // 150h
-            adapter.setStateChanged('consumable.mop', answer.result[22], true);        // 30h
+            adapter.setStateChanged('consumable.mop', answer.result[24], true);        // 30h
             
 			
             //adapter.setStateChanged('info.dnd', status.dnd_enabled, true);
@@ -1108,13 +1114,13 @@ function enabledExpert() {
             },
             native: {}
         });
-		 adapter.setObjectNotExists('info.set_mop', {
+		 adapter.setObjectNotExists('control.set_mop', {
             type: 'state',
             common: {
                 name: 'set_mop',
                 type: 'string',
                 read: true,
-                write: false,
+                write: true,
             },
             native: {}
         });
@@ -1334,7 +1340,7 @@ function serverConnected(){
             setTimeout(checkWiFi, 200)
             //setTimeout(sendCommand, 400, com.get_sound_volume)
             //setTimeout(sendCommand, 600, com.get_consumable)
-			//setTimeout(sendCommand, 600, com.set_language, [2])
+			setTimeout(sendCommand, 600, com.set_language, [2])
 			
            // setTimeout(sendCommand, 800, com.clean_summary)
             setTimeout(features.detect, 1000)
