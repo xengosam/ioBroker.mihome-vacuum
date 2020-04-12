@@ -641,10 +641,10 @@ const com = {
             adapter.setStateChanged('control.fan_power', Math.round(answer.result[8]), true);
             adapter.setStateChanged('info.error', answer.result[2], true);
 			adapter.setStateChanged('info.set_mop', answer.result[12], true);
-			 adapter.setStateChanged('consumable.main_brush', (Math.round(answer.result[20]), true);    // 300h
-            adapter.setStateChanged('consumable.side_brush',  (answer.result[18]), true);    // 200h
-            adapter.setStateChanged('consumable.filter', (Math.round(answer.result[22]), true);          // 150h
-            adapter.setStateChanged('consumable.mop', (Math.round(answer.result[22]), true);        // 30h
+			 adapter.setStateChanged('consumable.main_brush', answer.result[20], true);    // 300h
+            adapter.setStateChanged('consumable.side_brush',  answer.result[18], true);    // 200h
+            adapter.setStateChanged('consumable.filter', answer.result[22], true);          // 150h
+            adapter.setStateChanged('consumable.mop', answer.result[22], true);        // 30h
             
 			
             //adapter.setStateChanged('info.dnd', status.dnd_enabled, true);
