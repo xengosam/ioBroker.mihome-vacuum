@@ -661,15 +661,16 @@ const com = {
         }
     },
     "get_consumable": {
-        "method": "get_consumables",
+        "method": "get_prop",
+		"params": propParams,
         "action": function (answer) {
             // response= {"result":[{"main_brush_work_time":11472,"side_brush_work_time":11472,"filter_work_time":11472,"filter_element_work_time":3223,"sensor_dirty_time":11253}]}
             const consumable = answer.result[0] //parseConsumable(answer)
-            adapter.setStateChanged('consumable.main_brush', 100 - (Math.round(consumable.main_brush_work_time / 3600 / 3)), true);    // 300h
-            adapter.setStateChanged('consumable.side_brush', 100 - (Math.round(consumable.side_brush_work_time / 3600 / 2)), true);    // 200h
-            adapter.setStateChanged('consumable.filter', 100 - (Math.round(consumable.filter_work_time / 3600 / 1.5)), true);          // 150h
-            adapter.setStateChanged('consumable.sensors', 100 - (Math.round(consumable.sensor_dirty_time / 3600 / 0.3)), true);        // 30h
-            features.water_box && adapter.setStateChanged('consumable.water_filter', 100 - (Math.round(consumable.filter_element_work_time / 3600)), true);          // 100h
+         	adapter.setStateChanged('consumable.main_brush', answer.result[20], true);    // 300h
+            adapter.setStateChanged('consumable.side_brush',  answer.result[18], true);
+			adapter.setStateChanged('consumable.waterBox_filter', answer.result[16], true);
+            adapter.setStateChanged('consumable.filter', answer.result[22], true);          // 150h
+            adapter.setStateChanged('consumable.mop', answer.result[24], true);             // 100h
         }
     },
     "get_carpet_mode": {
