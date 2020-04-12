@@ -523,7 +523,7 @@ adapter.on('stateChange', function (id, state) {
 
         } else if (command === 'set_mop') {
             if (!state.val) return;
-			let  params = state.val;
+			let  params = state.val.replace('"','');
            sendCommand({method:'set_mop'},[params])
             adapter.setForeignState(id, state.val, true);
 
