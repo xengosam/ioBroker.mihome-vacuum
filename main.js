@@ -820,6 +820,7 @@ const com = {
     "loadMap": { // todo: when is trigered get_fresh_map_v1??
         "method": "get_map",
         "action": function (answer) {
+			adapter.log.warn(answer.result[0].id);
             MAP.updateMapPointer(answer.result[0].id);			
         }
     }
