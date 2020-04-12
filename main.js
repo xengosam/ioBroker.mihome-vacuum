@@ -35,6 +35,7 @@ let logEntries = {};
 let roomManager = null;
 let timerManager = null;
 let Map
+let propParams = ['run_state','mode','err_state','battary_life','box_type','mop_type','s_time','s_area','suction_grade','water_grade','remember_map','has_map','is_mop','has_newmap', 'cur_mapid','mop_route','water_percent','map_num','side_brush_life','side_brush_hours','main_brush_life','main_brush_hours','hypa_life','hypa_hours','mop_life','mop_hours'];
 
 // this parts will be translated
 const i18n = {
@@ -114,7 +115,7 @@ class Cleaning {
                 }
             } else
                 this.activeState = this.state;
-            sendCommand(com.get_sound_volume)
+           // sendCommand(com.get_sound_volume)
             if (features.carpetMode)
                 setTimeout(sendCommand, 200, com.get_carpet_mode)
         } else if (cleanStates.Pause === this.state) {
@@ -161,7 +162,7 @@ class Cleaning {
             if (cleanStatus === cleanStates.Cleaning && adapter.config.enableResumeZone) {
                 adapter.log.debug('Resuming paused ' + activeCleanStates[this.activeState].name);
                 sendCommand({method:activeCleanStates[this.activeState].resume}).then(function(){
-                    sendCommand(com.get_prop, ['run_state','mode','err_state','battary_life','box_type','mop_type','s_time','s_area','suction_grade','water_grade','remember_map','has_map','is_mop','has_newmap'])
+                    sendCommand(com.get_prop, propParams )
                 })
             } else {
                 adapter.log.info("should trigger cleaning " + activeCleanState.name + (messageObj.message || '') + ", but is currently active. Add to queue")
@@ -619,7 +620,7 @@ const com = {
     },
     "get_prop": {
         "method": "get_prop",
-		"params": ['run_state','mode','err_state','battary_life','box_type','mop_type','s_time','s_area','suction_grade','water_grade','remember_map','has_map','is_mop','has_newmap'],
+		"params": propParams,
         "action": function (answer) {
             adapter.setStateChanged('info.battery', answer.result[3], true);
             adapter.setStateChanged('info.cleanedtime', Math.round(answer.result[6] / 60), true);
@@ -1288,7 +1289,7 @@ function sendPing() {
             adapter.log.warn('Cannot send ping: ' + e);
         }
     } else {
-        sendCommand(com.get_prop,['run_state','mode','err_state','battary_life','box_type','mop_type','s_time','s_area','suction_grade','water_grade','remember_map','has_map','is_mop','has_newmap'])
+        sendCommand(com.get_prop,propParams)
         if (now > nextWiFiCheck)
             checkWiFi()
         timerManager && timerManager.check()
