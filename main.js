@@ -797,7 +797,7 @@ const com = {
         "params": "side_brush_work_time"
     },
     "spotclean": {
-        "method": "app_spot"
+        "method": "set_pointclean"
     },
     "resumeZoneClean": {
         "method": "resume_zoned_clean"
@@ -820,7 +820,8 @@ const com = {
     "loadMap": { // todo: when is trigered get_fresh_map_v1??
         "method": "get_map",
         "action": function (answer) {
-            MAP.updateMapPointer(answer.result[0]);
+            MAP.updateMapPointer(answer.result[1]);
+			adapter.log.debug('Map' + answer.result[0]+ answer.result[1]);
         }
     }
 
@@ -1566,7 +1567,7 @@ adapter.on('message',function(obj) {
                 return cleaning.clearQueue();
             case 'cleanSpot':
                 if (cleaning.startCleaning(cleanStates.SpotCleaning, obj))
-                    sendCustomCommand('app_spot');
+                    sendCustomCommand('set_pointclean');
                 return;
             case 'cleanZone':
                 if (!obj.message) return adapter.log.warn("cleanZone needs paramter coordinates")
