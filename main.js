@@ -437,6 +437,19 @@ class FeatureManager {
                     },
                     native: {}
                 });
+				adapter.log.info('create states for mop');
+                adapter.setObjectNotExists('consumable.mop', {
+                    type: "state",
+                    common: {
+                        name: i18n.mop,
+                        type: "number",
+                        role: "level",
+                        read: true,
+                        write: false,
+                        unit: "%"
+                    },
+                    native: {}
+                });
             }
         }
         this.water_box && adapter.setStateChanged('info.water_box', water_box_status === 1, true);
@@ -628,6 +641,12 @@ const com = {
             adapter.setStateChanged('control.fan_power', Math.round(answer.result[8]), true);
             adapter.setStateChanged('info.error', answer.result[2], true);
 			adapter.setStateChanged('info.set_mop', answer.result[12], true);
+			 adapter.setStateChanged('consumable.main_brush', (Math.round(answer.result[20]), true);    // 300h
+            adapter.setStateChanged('consumable.side_brush',  (answer.result[18]), true);    // 200h
+            adapter.setStateChanged('consumable.filter', (Math.round(answer.result[22]), true);          // 150h
+            adapter.setStateChanged('consumable.mop', (Math.round(answer.result[22]), true);        // 30h
+            
+			
             //adapter.setStateChanged('info.dnd', status.dnd_enabled, true);
             features.setWaterBox(answer.result[9]);
             if (cleaning.state != answer.result[0]) {
