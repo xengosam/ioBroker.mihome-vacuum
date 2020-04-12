@@ -261,8 +261,8 @@ class FeatureManager {
     }
 
     detect() {
-        sendCommand(com.get_carpet_mode) // test, if supported
-        sendCommand(com.loadRooms); // test, if supported
+       // sendCommand(com.get_carpet_mode) // test, if supported
+       // sendCommand(com.loadRooms); // test, if supported
     }
 
     setModel(model) {
