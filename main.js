@@ -523,7 +523,7 @@ adapter.on('stateChange', function (id, state) {
 
         } else if (command === 'set_mop') {
             if (!state.val) return;
-			let  params = state.val.replace('"','');
+			let  params = state.val;
            sendCommand({method:'set_mop'},[params])
             adapter.setForeignState(id, state.val, true);
 
@@ -1120,7 +1120,7 @@ function enabledExpert() {
             type: 'state',
             common: {
                 name: 'set_mop',
-                type: 'string',
+                type: 'int',
                 read: true,
                 write: true,
             },
