@@ -136,10 +136,9 @@ class Cleaning {
                 }
             }
             if (cleanStates.Charging === newVal){
-                sendCommand(com.get_consumable).finally(function(){
-                    sendCommand(com.clean_summary)
-                })
-                MAP.ENABLED && setTimeout(sendCommand,2000, com.loadMap);
+                sendMsg(com.get_consumable.method);
+                setTimeout(sendMsg, 500, com.clean_summary.method);
+                MAP.ENABLED && setTimeout(sendMsg,2000,'get_map_v1');
             }
         }
         adapter.setState('control.clean_home', this.activeState != 0, true);
